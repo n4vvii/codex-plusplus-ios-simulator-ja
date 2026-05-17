@@ -4,3 +4,11 @@ helpers/sim-input
 
 # macOS cruft
 .DS_Store
+
+# Local patch backups
+index.js.backup-*
+index.js.working-*
+index.js.working-good-*
+
+# Local README backups
+README.md.backup-*

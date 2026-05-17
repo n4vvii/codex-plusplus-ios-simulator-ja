@@ -1,3 +1,26 @@
+# Codex++ iOS Simulator Japanese UI Fork
+
+This is a Japanese UI compatible fork of the Codex++ iOS Simulator tweak for Codex 26.513.
+
+## Fork-specific changes
+
+- Adds compatibility fixes for Codex Desktop 26.513.31313.
+- Fixes the iOS Simulator item not appearing in Japanese UI environments.
+- Updates the right panel `+` menu injection target for the current Codex renderer structure.
+- Places the iOS Simulator item after Browser in the `+` menu.
+- Adds visible-area based responsive sizing for the simulator mirror.
+- Keeps the top toolbar controls at their normal scale.
+
+## Tested environment
+
+- macOS
+- Codex Desktop 26.513.31313
+- Codex++ 0.1.4
+- Japanese UI
+- iPhone 17 Pro simulator
+
+---
+
 # iOS Simulator for Codex++
 
 A Codex++ tweak that adds an **iOS Simulator** tab to Codex's right panel.

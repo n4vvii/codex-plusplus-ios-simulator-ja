@@ -1239,20 +1239,22 @@ function patchRendererAsset(rawUrl, source) {
 
 function patchReviewRuntimeBridge(source) {
   const helpers =
-    'function __codexppIosSimIcon(e){return(0,Q.jsxs)(`svg`,{width:16,height:16,viewBox:`0 0 20 20`,fill:`none`,xmlns:`http://www.w3.org/2000/svg`,...e,children:[(0,Q.jsx)(`rect`,{x:5.75,y:2.75,width:8.5,height:14.5,rx:2,stroke:`currentColor`,strokeWidth:1.5}),(0,Q.jsx)(`path`,{d:`M8.75 5h2.5`,stroke:`currentColor`,strokeWidth:1.25,strokeLinecap:`round`}),(0,Q.jsx)(`path`,{d:`M9 15h2`,stroke:`currentColor`,strokeWidth:1.25,strokeLinecap:`round`})]})}function __codexppIosSimPanel(e){let t=$.useRef(null),n=e.isActive===!0;return $.useEffect(()=>{let e=t.current;if(e==null)return;window.dispatchEvent(new CustomEvent(`__codexppIosSimNativePanelMounted`,{detail:{active:n}}))},[]),$.useEffect(()=>{let e=t.current;e!=null&&(e.setAttribute(`data-codexpp-ios-sim-native-active`,n?`true`:`false`),window.dispatchEvent(new CustomEvent(`__codexppIosSimNativePanelActiveChanged`,{detail:{active:n}})))},[n]),(0,Q.jsx)(`div`,{ref:t,className:`h-full min-h-0`,[`data-codexpp-ios-sim-native-panel-host`]:`true`,[`data-codexpp-ios-sim-native-active`]:n?`true`:`false`})}function __codexppIosSimOpenTab(e,t=!0){return pe.openTab(e,__codexppIosSimPanel,{id:`ios-simulator`,kind:`ios-simulator`,title:`iOS Simulator`,icon:(0,Q.jsx)(__codexppIosSimIcon,{className:`icon-xs shrink-0`}),props:{},activate:t,onActivate:()=>{window.dispatchEvent(new Event(`__codexppIosSimNativeTabActivated`))},onClose:()=>{window.dispatchEvent(new Event(`__codexppIosSimNativeTabClosed`))}}),!0}';
+    'function __codexppIosSimIcon(e){return(0,Q.jsxs)(`svg`,{width:16,height:16,viewBox:`0 0 20 20`,fill:`none`,xmlns:`http://www.w3.org/2000/svg`,...e,children:[(0,Q.jsx)(`rect`,{x:5.75,y:2.75,width:8.5,height:14.5,rx:2,stroke:`currentColor`,strokeWidth:1.5}),(0,Q.jsx)(`path`,{d:`M8.75 5h2.5`,stroke:`currentColor`,strokeWidth:1.25,strokeLinecap:`round`}),(0,Q.jsx)(`path`,{d:`M9 15h2`,stroke:`currentColor`,strokeWidth:1.25,strokeLinecap:`round`})]})}function __codexppIosSimPanel(e){let t=$.useRef(null),n=e.isActive===!0;return $.useEffect(()=>{let e=t.current;if(e==null)return;window.dispatchEvent(new CustomEvent(`__codexppIosSimNativePanelMounted`,{detail:{active:n}}))},[]),$.useEffect(()=>{let e=t.current;e!=null&&(e.setAttribute(`data-codexpp-ios-sim-native-active`,n?`true`:`false`),window.dispatchEvent(new CustomEvent(`__codexppIosSimNativePanelActiveChanged`,{detail:{active:n}})))},[n]),(0,Q.jsx)(`div`,{ref:t,className:`h-full min-h-0`,[`data-codexpp-ios-sim-native-panel-host`]:`true`,[`data-codexpp-ios-sim-native-active`]:n?`true`:`false`})}function __codexppIosSimOpenTab(e,t=!0){try{return s.openTab(e,__codexppIosSimPanel,{id:`ios-simulator`,kind:`ios-simulator`,title:`iOS Simulator`,icon:(0,Q.jsx)(__codexppIosSimIcon,{className:`icon-xs shrink-0`}),props:{},activate:t,onActivate:()=>{window.dispatchEvent(new Event(`__codexppIosSimNativeTabActivated`))},onClose:()=>{window.dispatchEvent(new Event(`__codexppIosSimNativeTabClosed`))}}),!0}catch(n){console.warn(`[ios-sim] failed to open native tab`,n),window.dispatchEvent(new CustomEvent(`__codexppIosSimOpenNativeTabFailed`,{detail:String(n?.message||n)}));return!1}}';
 
-  let out = replaceRequired(
-    source,
-    "function wr(e){let t=(0,Z.c)(31),",
-    helpers + "function wr(e){let t=(0,Z.c)(31),",
-    "native iOS simulator tab helpers",
+  let out = source;
+
+  out = replaceRequired(
+    out,
+    "function Cr(e){let t=(0,Z.c)(52),",
+    helpers + "function Cr(e){let t=(0,Z.c)(52),",
+    "native iOS simulator tab helpers current Codex"
   );
 
   out = replaceRequired(
     out,
-    "t[0]!==i||t[1]!==a||t[2]!==f||t[3]!==d.cwd||t[4]!==s?(p=()=>{C(s,!0,{browserConversationId:i,browserHostDisplayName:a,cwd:d.cwd,isAgentWorking:f})},t[0]=i,t[1]=a,t[2]=f,t[3]=d.cwd,t[4]=s,t[5]=p):p=t[5];let m=p,h;",
-    "t[0]!==i||t[1]!==a||t[2]!==f||t[3]!==d.cwd||t[4]!==s?(p=()=>{C(s,!0,{browserConversationId:i,browserHostDisplayName:a,cwd:d.cwd,isAgentWorking:f})},t[0]=i,t[1]=a,t[2]=f,t[3]=d.cwd,t[4]=s,t[5]=p):p=t[5];$.useEffect(()=>{let e=()=>{__codexppIosSimOpenTab(s,!0),l||ue(s)};globalThis.__codexppIosSimOpenNativeTab=e,window.addEventListener(`__codexppIosSimOpenNativeTab`,e);return()=>{globalThis.__codexppIosSimOpenNativeTab===e&&delete globalThis.__codexppIosSimOpenNativeTab,window.removeEventListener(`__codexppIosSimOpenNativeTab`,e)}},[s,l]);let m=p,h;",
-    "native iOS simulator tab opener bridge",
+    "children:[H,U,ee,W,G,te]})",
+    "children:[H,U,ee,W,G,te,(0,Q.jsx)(X.Item,{LeftIcon:__codexppIosSimIcon,onSelect:()=>{__codexppIosSimOpenTab(o,!0)},children:`iOS Simulator`})]})",
+    "native iOS simulator menu item current Codex"
   );
 
   return out;
@@ -1574,7 +1576,7 @@ function injectStyles() {
       position: fixed;
       z-index: 9999;
       width: 260px;
-      max-height: min(480px, calc(100vh - 80px));
+      max-height: min(480px, calc(100vh - 210px));
       overflow-y: auto;
       padding: 4px;
       border: 0;
@@ -2523,16 +2525,112 @@ function createPanel(api) {
   content.style.background = "transparent";
 
   const stage = document.createElement("div");
-  stage.className = "relative flex h-full w-full items-center justify-center";
-  stage.style.padding = "24px 12px";
+  stage.className = "relative flex min-h-0 w-full items-center justify-center overflow-hidden";
+  stage.style.padding = "0";
+  stage.style.boxSizing = "border-box";
 
   const mirror = document.createElement("img");
   mirror.setAttribute(TWEAK_ATTR, "mirror");
   mirror.alt = "iOS Simulator";
   mirror.draggable = false;
+  mirror.style.width = "auto";
+  mirror.style.height = "auto";
+  mirror.style.width = "auto";
+  mirror.style.height = "auto";
   mirror.style.maxWidth = "100%";
   mirror.style.maxHeight = "100%";
   mirror.style.objectFit = "contain";
+  mirror.style.objectPosition = "center center";
+
+  // Responsive sizing for the iOS Simulator mirror
+  (() => {
+    const SIDE_GAP = 28;
+    const TOP_GAP = 22;
+    const BOTTOM_GAP = 26;
+    const MAX_SCALE = 1.0;
+
+    let raf = 0;
+
+    const getViewportHeight = () => {
+      return Math.floor(window.visualViewport?.height || window.innerHeight || document.documentElement.clientHeight || 800);
+    };
+
+    const applyDynamicFit = () => {
+      if (raf) cancelAnimationFrame(raf);
+
+      raf = requestAnimationFrame(() => {
+        const container = stage;
+        const img = mirror;
+        if (!container || !img) return;
+
+        const stageRect = container.getBoundingClientRect();
+        const parentRect = container.parentElement?.getBoundingClientRect?.() || stageRect;
+
+        const viewportH = getViewportHeight();
+
+        // Use the visible area from the stage top to the viewport bottom instead of relying on the internal stage height.
+        const visibleH = Math.max(180, viewportH - stageRect.top);
+        const visibleW = Math.max(160, parentRect.width || stageRect.width);
+
+        const availableW = Math.max(120, visibleW - SIDE_GAP * 2);
+        const availableH = Math.max(160, visibleH - TOP_GAP - BOTTOM_GAP);
+
+        const naturalW = img.naturalWidth || 390;
+        const naturalH = img.naturalHeight || 844;
+        const aspect = naturalW / naturalH;
+
+        let targetW = availableW;
+        let targetH = targetW / aspect;
+
+        if (targetH > availableH) {
+          targetH = availableH;
+          targetW = targetH * aspect;
+        }
+
+        targetW = Math.floor(targetW * MAX_SCALE);
+        targetH = Math.floor(targetH * MAX_SCALE);
+
+        container.style.boxSizing = "border-box";
+        container.style.width = "100%";
+        container.style.height = `${visibleH}px`;
+        container.style.maxHeight = `${visibleH}px`;
+        container.style.padding = `${TOP_GAP}px ${SIDE_GAP}px ${BOTTOM_GAP}px ${SIDE_GAP}px`;
+        container.style.display = "flex";
+        container.style.alignItems = "center";
+        container.style.justifyContent = "center";
+        container.style.overflow = "hidden";
+
+        img.style.display = "block";
+        img.style.width = `${targetW}px`;
+        img.style.height = `${targetH}px`;
+        img.style.maxWidth = `${targetW}px`;
+        img.style.maxHeight = `${targetH}px`;
+        img.style.objectFit = "contain";
+        img.style.objectPosition = "center center";
+        img.style.margin = "0";
+      });
+    };
+
+    applyDynamicFit();
+
+    try {
+      const ro = new ResizeObserver(applyDynamicFit);
+      ro.observe(stage);
+      ro.observe(stage.parentElement || stage);
+      ro.observe(document.documentElement);
+    } catch {}
+
+    window.addEventListener("resize", applyDynamicFit);
+    window.visualViewport?.addEventListener?.("resize", applyDynamicFit);
+    window.visualViewport?.addEventListener?.("scroll", applyDynamicFit);
+    window.addEventListener("focus", applyDynamicFit);
+
+    setTimeout(applyDynamicFit, 50);
+    setTimeout(applyDynamicFit, 250);
+    setTimeout(applyDynamicFit, 750);
+    setTimeout(applyDynamicFit, 1500);
+  })();
+  mirror.style.objectPosition = "center center";
   mirror.style.display = "none";
   mirror.style.userSelect = "none";
   mirror.style.touchAction = "none";
